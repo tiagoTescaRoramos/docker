@@ -1,0 +1,64 @@
+version: '2.2'
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "443:443"
+      - "80:80"
+    mem_limit: 2G
+    links:
+      - "php73"
+      - "rabbitmq"
+    volumes:
+      - ../../var/log/nginx:/var/log/nginx
+      - ./config/ssl/cert.pem:/etc/nginx/ssl/cert.pem
+      - ./config/ssl/cert.key:/etc/nginx/ssl/cert.key
+      - ./config/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./config/nginx/sites-enabled/:/etc/nginx/conf.d/
+      - ./config/nginx/includes:/etc/nginx/includes
+    volumes_from:
+      - php73
+  php73:
+    build: docker-images/php73
+    container_name: php73
+    volumes:
+      - ..:/var/www/html
+      - /tmp:/tmp
+    links:
+      - mysql
+      - redis
+      - rabbitmq
+    mem_limit: 2G
+    stdin_open: true
+    tty: true
+  mysql:
+    image: mariadb:latest
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234qwer
+    volumes:
+      - ../databases/mysql56:/var/lib/mysql
+  mailhog:
+    image: mailhog/mailhog
+    container_name: mailhog
+    mem_limit: 2G
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+  redis:
+    image: redis:4.0
+    container_name: redis
+    mem_limit: 2G
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: rabbitmq
+    environment:
+        RABBITMQ_ERLANG_COOKIE: ${RABBITMQ_ERLANG_COOKIE}
+        RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+        RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+    ports:
+        - 5672:5672
+        - 15672:15672
