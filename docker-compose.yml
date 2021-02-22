@@ -10,6 +10,7 @@ services:
     links:
       - "php73"
       - "rabbitmq"
+      - "elasticsearch"
     volumes:
       - ../../var/log/nginx:/var/log/nginx
       - ./config/ssl/cert.pem:/etc/nginx/ssl/cert.pem
@@ -25,6 +26,7 @@ services:
     volumes:
       - ..:/var/www/html
       - /tmp:/tmp
+      - ../.composer:/home/docker-m2/.composer 
     links:
       - mysql
       - redis
@@ -48,6 +50,12 @@ services:
     ports:
       - "1025:1025"
       - "8025:8025"
+  elasticsearch:
+    image: elasticsearch:6.8.13
+    container_name: elasticsearch
+    ports:
+      - 9200:9200
+      - 9300:9300
   redis:
     image: redis:4.0
     container_name: redis
