@@ -9,6 +9,7 @@ services:
     mem_limit: 2G
     links:
       - "php73"
+      - "php74"
       - "rabbitmq"
       - "elasticsearch"
     volumes:
@@ -20,6 +21,7 @@ services:
       - ./config/nginx/includes:/etc/nginx/includes
     volumes_from:
       - php73
+      - php74
   php73:
     build: docker-images/php73
     container_name: php73
@@ -31,9 +33,27 @@ services:
       - mysql
       - redis
       - rabbitmq
+      - elasticsearch
     mem_limit: 2G
     stdin_open: true
     tty: true
+  php74:
+      build: docker-images/php74
+      container_name: php74
+      volumes:
+        - ..:/var/www/html
+        - /home/tiago/.ssh/:/home/tiago/.ssh/
+        - ../tmp/:/tmp/
+      links:
+        - mysql
+        - redis
+        - rabbitmq
+        - elasticsearch
+      mem_limit: 1G
+      environment:
+        - PHP_IDE_CONFIG=serverName=XDebug #use to debug from cli inside docker container call php -dxdebug.remote_host=172.17.0.1 //host IP
+      stdin_open: true
+      tty: true
   mysql:
     image: mariadb:latest
     container_name: mysql
