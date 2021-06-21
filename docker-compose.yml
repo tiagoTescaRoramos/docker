@@ -42,7 +42,7 @@ services:
       container_name: php74
       volumes:
         - ..:/var/www/html
-        - /home/tiago/.ssh/:/home/tiago/.ssh/
+        - ../.composer:/home/docker-m2/.composer
         - ../tmp/:/tmp/
       links:
         - mysql
