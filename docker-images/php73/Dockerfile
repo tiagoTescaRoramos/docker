@@ -66,8 +66,14 @@ RUN composer config --global process-timeout 1500
 RUN composer config --global repo.packagist composer https://packagist.org
 
 # PHPCS
-RUN composer global require zifius/magizendo
-RUN ln -s /home/docker-m2/.composer/vendor/bin/phpcs /usr/local/bin
+RUN composer global require squizlabs/php_codesniffer
+USER root
+RUN curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
+RUN chmod +x phpcs.phar
+RUN mv phpcs.phar /usr/local/bin/phpcs
+RUN curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar
+RUN chmod +x phpcbf.phar
+RUN mv phpcbf.phar /usr/local/bin/phpcbf
 
 # Make sure the volume mount point is empty
 RUN rm -rf /var/www/html/*
