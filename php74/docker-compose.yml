@@ -24,8 +24,8 @@ services:
       container_name: php
       volumes:
         - ../../:/var/www/html
-        - /home/tiago/.ssh/:/home/tiago/.ssh
-        - ../../.composer/:/home/tiago/.composer
+        - /home/ttescaro/.ssh/:/home/ttescaro/.ssh
+        - ../../.composer/:/home/ttescaro/.composer
         - ../../tmp/:/tmp
       links:
         - mysql

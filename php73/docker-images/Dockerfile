@@ -60,17 +60,17 @@ RUN curl -O https://files.magerun.net/n98-magerun2.phar \
 	&& chmod +x /usr/bin/n98;
 
 #set folder owner for composer cache
-RUN useradd -m tiago
-RUN chown -R tiago:tiago /var/www/html/
-USER tiago
+RUN useradd -m ttescaro
+RUN chown -R ttescaro:ttescaro /var/www/html/
+USER ttescaro
 
 RUN composer config --global process-timeout 1500
 RUN composer config --global repo.packagist composer https://packagist.org
 
 # PHPCS
 RUN composer global require squizlabs/php_codesniffer
-USER tiago
-RUN phpcs --config-set installed_paths /home/tiago/.composer/vendor/zifius/magizendo/ \
+USER ttescaro
+RUN phpcs --config-set installed_paths /home/ttescaro/.composer/vendor/zifius/magizendo/ \
     && phpcs --config-set default_standard Magento2
 
 # Make sure the volume mount point is empty
