@@ -1,0 +1,66 @@
+version: '2.2'
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "443:443"
+      - "80:80"
+    mem_limit: 1G
+    links:
+      - "php56"
+      - "elasticsearch"
+    volumes:
+      - ../../var/log/nginx:/var/log/nginx
+      - ./../config/ssl/cert.pem:/etc/nginx/ssl/cert.pem
+      - ./../config/ssl/cert.key:/etc/nginx/ssl/cert.key
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/sites-enabled/:/etc/nginx/conf.d/
+      - ./../config/nginx/includes:/etc/nginx/includes
+    volumes_from:
+      - php56
+  php56:
+      build: docker-images
+      container_name: php
+      volumes:
+        - ../../:/var/www/html
+        - /home/tiago/.ssh/:/home/tiago/.ssh/
+        - ../../.composer56/:/home/tiago/.composer/
+        - ../../tmp/:/tmp/
+      links:
+        - mysql
+        - redis
+        - elasticsearch
+      mem_limit: 1G
+      environment:
+        - PHP_IDE_CONFIG=serverName=XDebug #use to debug from cli inside docker container call php -dxdebug.remote_host=172.17.0.1 //host IP
+      stdin_open: true
+      tty: true
+  elasticsearch:
+      image: elasticsearch:6.8.15
+      container_name: elasticsearch
+      mem_limit: 1G
+      ports:
+        - 9200:9200
+        - 9300:9300
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    mem_limit: 1G
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234qwer
+    volumes:
+      - ../../databases/mysql57:/var/lib/mysql
+  mailhog:
+    image: mailhog/mailhog
+    container_name: mailhog
+    mem_limit: 1G
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+  redis:
+    image: redis:4.0
+    container_name: redis
+    mem_limit: 1G

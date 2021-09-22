@@ -1,6 +1,6 @@
 # Nginx + PHP + MySql + MailHog + Redis + PHPCS
 You need cloning the repository.
-Access the folder .docker.
+Access the folder docker, cloned repository.
 
 
 ```
@@ -11,41 +11,34 @@ chmod 0777 -R .composer
 cd docker-m2/
 ```
 
+Access the folder docker-m2.
+
+```
+cd docker
+```
+
+After, Access the folder you want, each folder is PHP version with some configuration.
+
 After, You need to create containers, below the code:
 ```
-docker-composer up -d
+sh up.sh
 ```
+
+If you want to down all containers. Access folder docker, and execute command:
+```
+sh down.sh
+```
+
 
 You need to have in your computer **docker, and docker-composer**
 
-You need to add config the your project in: **docker-m2/config/nginx/sites-enabled**
-
-For exemplo: **docker-m2/config/nginx/sites-enabled/default_m2.conf**
-```
-server {
-    server_name docker.m2.local;
-    set         $store '';
-    set $MAGE_ROOT /var/www/html/;
-    include     /etc/nginx/includes/magento2.conf;
-}
-```
-
-Your projects must be at the same root as the docker-m2 folder.
-
-For exemplo:
-```
-.
-..
-docker-m2
-project-magento-2
-```
-
 # PHP Code Sniffer
-We have two PHPCS. The phpcs56.sh and phpcs73.sh. To configure in vs code, below is cofiguration the file (.vscode/settings.json).
+We have PHPCS and PHPCBF. To configure in vs code, below is cofiguration the file (.vscode/settings.json).
 
 ```
 {
-    "phpcs.executablePath": "/storage/.docker/php73cs.sh"
+    "phpsab.executablePathCS": "/storage/.docker/phpcs.sh",
+    "phpsab.executablePathCBF": "/storage/.docker/phpcbf.sh"
 }
 ```
 
@@ -53,4 +46,4 @@ We have two PHPCS. The phpcs56.sh and phpcs73.sh. To configure in vs code, below
 Use port 9001
 
 # Executable PHP
-docker-m2/php73.sh
+docker/php.sh

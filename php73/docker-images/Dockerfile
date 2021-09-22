@@ -51,7 +51,7 @@ COPY xdebug.ini /usr/local/etc/php/conf.d/ext-xdebug.ini
 
 #COMPOSER
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
-    && php composer-setup.php --version=1.10.14 \
+    && php composer-setup.php \
     && rm composer-setup.php \
     && mv composer.phar /usr/bin/composer;
 
@@ -60,20 +60,18 @@ RUN curl -O https://files.magerun.net/n98-magerun2.phar \
 	&& chmod +x /usr/bin/n98;
 
 #set folder owner for composer cache
-RUN useradd -m docker-m2
-RUN adduser docker-m2 root
+RUN useradd -m tiago
+RUN chown -R tiago:tiago /var/www/html/
+USER tiago
+
 RUN composer config --global process-timeout 1500
 RUN composer config --global repo.packagist composer https://packagist.org
 
 # PHPCS
 RUN composer global require squizlabs/php_codesniffer
-USER root
-RUN curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
-RUN chmod +x phpcs.phar
-RUN mv phpcs.phar /usr/local/bin/phpcs
-RUN curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar
-RUN chmod +x phpcbf.phar
-RUN mv phpcbf.phar /usr/local/bin/phpcbf
+USER tiago
+RUN phpcs --config-set installed_paths /home/tiago/.composer/vendor/zifius/magizendo/ \
+    && phpcs --config-set default_standard Magento2
 
 # Make sure the volume mount point is empty
 RUN rm -rf /var/www/html/*
