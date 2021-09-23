@@ -62,7 +62,7 @@ COPY ext-xdebug.ini /usr/local/etc/php/conf.d/ext-xdebug.ini
 
 ##COMPOSER
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
-    && php composer-setup.php \
+    && php composer-setup.php  --version=1.10.22 \
     && php -r "unlink('composer-setup.php');" \
     && mv composer.phar /usr/bin/composer
 
