@@ -1,3 +1,0 @@
-/config/		.docker/config/
-/docker-images/		.docker/docker-images/
-/docker-compose.yml	.docker/docker-compose.yml

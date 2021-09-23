@@ -2,3 +2,6 @@ rabbitmq/data/mnesia
 rabbitmq/data/.erlang.cookie
 rabbitmq/logs/*
 ssh/
+sites-enabled/
+!sites-enabled/magento2.conf
+!sites-enabled/magento1.conf
