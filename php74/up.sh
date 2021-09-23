@@ -1,3 +1,6 @@
+#!/usr/bin/env bash
 sudo sysctl -w vm.max_map_count=262144
-sh ../down.sh
+cd ../
+sh down.sh
+cd php74
 docker-compose up -d
