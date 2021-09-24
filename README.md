@@ -24,6 +24,22 @@ After, You need to create containers, below the code:
 sh up.sh
 ```
 
+Or
+
+You can up thus, access folder docker and execute the command:
+
+```
+./up.sh php56
+```
+or
+```
+./up.sh php73
+```
+or
+```
+./up.sh php74
+```
+
 If you want to down all containers. Access folder docker, and execute command:
 ```
 sh down.sh
