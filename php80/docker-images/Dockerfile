@@ -1,4 +1,4 @@
-FROM php:7.3-fpm
+FROM php:8.0.0-fpm
 
 RUN apt-get update && apt-get install -y --allow-unauthenticated \
 		pkg-config \
@@ -18,23 +18,22 @@ RUN apt-get update && apt-get install -y --allow-unauthenticated \
         vim \
         cron \
 		nodejs \
-		npm \
-	&& docker-php-ext-configure gd --with-freetype-dir=/usr/include/freetype --with-jpeg-dir=/usr/include/ \
-	&& docker-php-ext-install gd \
-	&& docker-php-ext-install pdo \
-	&& docker-php-ext-install mysqli \
-	&& docker-php-ext-install pdo_mysql \
-	&& docker-php-ext-install intl \
-	&& docker-php-ext-install opcache \
-	&& docker-php-ext-install xml \
-	&& docker-php-ext-install soap \
-	&& docker-php-ext-install xsl \
-	&& docker-php-ext-install zip \
-	&& docker-php-ext-install json \
-	&& docker-php-ext-install bcmath \
-	&& docker-php-ext-install sockets \
-	&& pecl install -f xdebug-2.9.8 \
-	&& docker-php-ext-enable xdebug;
+		npm;
+RUN docker-php-ext-configure gd --with-freetype=/usr/include/freetype --with-jpeg=/usr/include/;
+RUN docker-php-ext-install gd;
+RUN docker-php-ext-install pdo;
+RUN docker-php-ext-install mysqli;
+RUN docker-php-ext-install pdo_mysql;
+RUN docker-php-ext-install intl;
+RUN docker-php-ext-install opcache;
+RUN docker-php-ext-install xml;
+RUN docker-php-ext-install soap;
+RUN docker-php-ext-install xsl;
+RUN docker-php-ext-install zip;
+RUN docker-php-ext-install bcmath;
+RUN docker-php-ext-install sockets;
+RUN pecl install -f xdebug;
+RUN docker-php-ext-enable xdebug;
 
 ### Install Mailhog
 ENV GOPATH /tmp

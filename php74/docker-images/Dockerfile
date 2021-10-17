@@ -78,6 +78,8 @@ RUN chmod +x phpcbf.phar
 RUN mv phpcbf.phar /usr/local/bin/phpcbf
 USER ttescaro
 
+RUN curl -sS https://accounts.magento.cloud/cli/installer | php
+
 # Make sure the volume mount point is empty
 RUN rm -rf /var/www/html/*
 

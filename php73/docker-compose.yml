@@ -25,6 +25,7 @@ services:
     volumes:
       - ../../:/var/www/html
       - ~/.ssh/:/home/ttescaro/.ssh
+      - ~/.magento-cloud/:/home/ttescaro/.magento-cloud
       - ../../.composer73/:/home/ttescaro/.composer
       - ../../tmp/:/tmp
     links:

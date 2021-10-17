@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 if [ "$@" == "php56" ]; then
     cd "php56"
-    ./up.sh
+    ./rebuild.sh
 elif [ "$@" == "php73" ]; then
     cd "php73"
-    ./up.sh
+    ./rebuild.sh
 elif [ "$@" == "php74" ]; then
     cd "php74"
-    ./up.sh
+    ./rebuild.sh
 elif [ "$@" == "php80" ]; then
     cd "php80"
-    ./up.sh
+    ./rebuild.sh
 else
     ./down.sh
     echo "Versão do PHP não encontrada."

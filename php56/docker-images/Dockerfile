@@ -88,5 +88,7 @@ USER ttescaro
 RUN phpcs --config-set installed_paths /home/ttescaro/.composer/vendor/zifius/magizendo/ \
     && phpcs --config-set default_standard Magento1
 
+RUN curl -sS https://accounts.magento.cloud/cli/installer | php
+
 # Make sure the volume mount point is empty
 RUN rm -rf /var/www/html/*
