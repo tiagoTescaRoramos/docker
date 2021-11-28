@@ -76,10 +76,12 @@ RUN mv phpcs.phar /usr/local/bin/phpcs
 RUN curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar
 RUN chmod +x phpcbf.phar
 RUN mv phpcbf.phar /usr/local/bin/phpcbf
-USER ttescaro
 
+# Magento cloud cli
 RUN curl -sS https://accounts.magento.cloud/cli/installer | php
 
+# change user
+USER ttescaro
 # Make sure the volume mount point is empty
 RUN rm -rf /var/www/html/*
 
