@@ -36,6 +36,8 @@ RUN apt-get update && apt-get install -y --allow-unauthenticated \
 	&& pecl install -f xdebug-2.9.8 \
 	&& docker-php-ext-enable xdebug;
 
+RUN docker-php-ext-install calendar && docker-php-ext-configure calendar;
+
 ### Install Mailhog
 ENV GOPATH /tmp
 RUN cd /tmp
@@ -77,11 +79,14 @@ RUN curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar
 RUN chmod +x phpcbf.phar
 RUN mv phpcbf.phar /usr/local/bin/phpcbf
 
-# Magento cloud cli
-RUN curl -sS https://accounts.magento.cloud/cli/installer | php
-
 # change user
 USER ttescaro
+
+# Magento cloud cli
+RUN php -r "copy('https://accounts.magento.cloud/cli/installer', 'magento-cloud.php');" \
+    && php magento-cloud.php \
+    && rm magento-cloud.php;
+
 # Make sure the volume mount point is empty
 RUN rm -rf /var/www/html/*
 
