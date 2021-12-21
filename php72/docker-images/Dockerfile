@@ -49,11 +49,17 @@ COPY opcache.ini /usr/local/etc/php/conf.d/opcache.ini
 COPY php-fpm.conf /usr/local/etc/
 COPY xdebug.ini /usr/local/etc/php/conf.d/ext-xdebug.ini
 
-#COMPOSER
+#COMPOSER 2
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php composer-setup.php \
     && rm composer-setup.php \
     && mv composer.phar /usr/bin/composer;
+
+##COMPOSER 1
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
+    && php composer-setup.php  --version=1.10.22 \
+    && php -r "unlink('composer-setup.php');" \
+    && mv composer.phar /usr/bin/composer1
 
 RUN curl -O https://files.magerun.net/n98-magerun2.phar \
 	&& mv n98-magerun2.phar /usr/bin/n98 \
