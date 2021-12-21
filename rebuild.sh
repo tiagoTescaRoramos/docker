@@ -2,6 +2,9 @@
 if [ "$@" == "php56" ]; then
     cd "php56"
     ./rebuild.sh
+elif [ "$@" == "php72" ]; then
+    cd "php72"
+    ./rebuild.sh
 elif [ "$@" == "php73" ]; then
     cd "php73"
     ./rebuild.sh

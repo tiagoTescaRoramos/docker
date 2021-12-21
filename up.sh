@@ -2,6 +2,9 @@
 if [ "$@" == "php56" ]; then
     cd "php56"
     ./up.sh
+elif [ "$@" == "php72" ]; then
+    cd "php72"
+    ./up.sh
 elif [ "$@" == "php73" ]; then
     cd "php73"
     ./up.sh
