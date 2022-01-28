@@ -11,8 +11,8 @@ elif [ "$@" == "php73" ]; then
 elif [ "$@" == "php74" ]; then
     cd "php74"
     ./up.sh
-elif [ "$@" == "php80" ]; then
-    cd "php80"
+elif [ "$@" == "php81" ]; then
+    cd "php81"
     ./up.sh
 else
     ./down.sh

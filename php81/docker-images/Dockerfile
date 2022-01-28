@@ -1,4 +1,4 @@
-FROM php:8.0.0-fpm
+FROM php:8.1.2-fpm
 
 RUN apt-get update && apt-get install -y --allow-unauthenticated \
 		pkg-config \
@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y --allow-unauthenticated \
 		libxml2-dev \
 		libxslt-dev \
 		procps \
-		libjpeg62-turbo-dev \ 
+		libjpeg62-turbo-dev \
 		g++ \
         golang-go \
         git-core \

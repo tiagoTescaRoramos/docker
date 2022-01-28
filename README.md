@@ -63,3 +63,10 @@ Use port 9001
 
 # Executable PHP
 docker/php.sh
+
+# Mysql
+**User:** root
+
+**Password:** 1234qwer
+
+**Host:** localhost

@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y --allow-unauthenticated \
 		libxml2-dev \
 		libxslt-dev \
 		procps \
-		libjpeg62-turbo-dev \ 
+		libjpeg62-turbo-dev \
 		g++ \
         golang-go \
         git-core \
@@ -56,6 +56,12 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php composer-setup.php \
     && rm composer-setup.php \
     && mv composer.phar /usr/bin/composer;
+
+##COMPOSER 1
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
+    && php composer-setup.php  --version=1.10.22 \
+    && php -r "unlink('composer-setup.php');" \
+    && mv composer.phar /usr/bin/composer1;
 
 RUN curl -O https://files.magerun.net/n98-magerun2.phar \
 	&& mv n98-magerun2.phar /usr/bin/n98 \
