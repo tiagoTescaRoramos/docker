@@ -9,7 +9,6 @@ services:
     mem_limit: 1G
     links:
       - "php"
-      - "elasticsearch"
     volumes:
       - ../../var/log/nginx:/var/log/nginx
       - ./../config/ssl/cert.pem:/etc/nginx/ssl/cert.pem
@@ -31,6 +30,8 @@ services:
     links:
       - mysql
       - redis
+      - rabbitmq
+      - elasticsearch
     mem_limit: 1G
     environment:
       - PHP_IDE_CONFIG=serverName=XDebug #use to debug from cli inside docker container call php -dxdebug.remote_host=172.17.0.1 //host IP
@@ -60,9 +61,18 @@ services:
     container_name: mailhog
     mem_limit: 1G
     ports:
-      - "1025:1025"
-      - "8025:8025"
+      - 1025:1025
+      - 8025:8025
   redis:
     image: redis:4.0
     container_name: redis
     mem_limit: 1G
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: 'guest'
+      RABBITMQ_DEFAULT_PASS: 'guest'
+    ports:
+      - 5672:5672
+      - 15672:15672
