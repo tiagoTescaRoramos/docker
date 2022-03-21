@@ -7,4 +7,4 @@ sites-enabled/
 !sites-enabled/magento1.conf
 .idea
 .env
-dumps/*
+dumps/*.sql

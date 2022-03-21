@@ -74,4 +74,4 @@ Put your file in dumps/. Execute:
 ```
 ./restoreDB.sh
 ```
-When finish, command delete your files in dumps/.
+When finish, command will delete your files in dumps/.
