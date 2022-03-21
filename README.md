@@ -40,6 +40,12 @@ sh down.sh
 
 You need to have in your computer **docker, and docker-composer**
 
+Configuration site-enabled, execute this command:
+
+```
+./config-nginx-server-name.sh
+```
+
 # PHP Code Sniffer
 We have PHPCS and PHPCBF. To configure in vs code, below is cofiguration the file (.vscode/settings.json).
 
