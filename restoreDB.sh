@@ -15,7 +15,7 @@ elif [ $database != '' ]; then
   echo "CREATE DATABASE IF NOT EXISTS $database;" >> dumps/createdatabase.sql
   if docker exec -i mysql mysql -u root -p$password < dumps/createdatabase.sql &&
     docker exec -i mysql mysql -u root -p$password $database < "dumps/$file"; then
-      rm dumps/*;
+      rm dumps/*.sql;
       echo "Restore finish.";
   else
     echo "Problem with restore";
