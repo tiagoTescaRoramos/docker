@@ -1,4 +1,4 @@
-# Nginx + PHP + MySql + MailHog + Redis + PHPCS
+# Nginx + PHP + MySql + MailHog + Redis + RabbitMQ + PHPCS + PHPCBF
 You need cloning the repository.
 Access the folder docker, cloned repository.
 
@@ -17,27 +17,19 @@ Access the folder docker-m2.
 cd docker
 ```
 
-After, Access the folder you want, each folder is PHP version with some configuration.
-
-After, You need to create containers, below the code:
+You can up thus, execute the command:
 ```
-sh up.sh
+./up.sh
 ```
 
 Or
 
-You can up thus, access folder docker and execute the command:
-
 ```
 ./up.sh php56
 ```
-or
+Set version the PHP
 ```
 ./up.sh php73
-```
-or
-```
-./up.sh php74
 ```
 
 If you want to down all containers. Access folder docker, and execute command:
@@ -67,6 +59,13 @@ docker/php.sh
 # Mysql
 **User:** root
 
-**Password:** 1234qwer
+**Password:** put in .env
 
 **Host:** localhost
+
+### Restore
+Put your file in dumps/. Execute: 
+```
+./restoreDB.sh
+```
+When finish, command delete your files in dumps/.

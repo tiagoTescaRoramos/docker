@@ -19,13 +19,16 @@ services:
     volumes_from:
       - php
   php:
-    build: docker-images
+    build:
+      context: docker-images
+      args:
+        USERNAME: ${CONTAINER_USER}
     container_name: php
     volumes:
       - ../../:/var/www/html
-      - ~/.ssh/:/home/ttescaro/.ssh
-      - ~/.magento-cloud/:/home/ttescaro/.magento-cloud
-      - ../../.composer73/:/home/ttescaro/.composer
+      - ~/.ssh/:/home/${CONTAINER_USER}/.ssh
+      - ~/.magento-cloud/:/home/${CONTAINER_USER}/.magento-cloud
+      - ../../.composer73/:/home/${CONTAINER_USER}/.composer
       - ../../tmp/:/tmp
     links:
       - mysql
@@ -53,7 +56,7 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: 1234qwer
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
     volumes:
       - ../../databases/mysql57:/var/lib/mysql
   mailhog:
@@ -71,8 +74,8 @@ services:
     image: rabbitmq:3-management-alpine
     container_name: rabbitmq
     environment:
-      RABBITMQ_DEFAULT_USER: 'guest'
-      RABBITMQ_DEFAULT_PASS: 'guest'
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
     ports:
       - 5672:5672
       - 15672:15672

@@ -58,10 +58,12 @@ RUN curl -O https://files.magerun.net/n98-magerun2.phar \
 	&& mv n98-magerun2.phar /usr/bin/n98 \
 	&& chmod +x /usr/bin/n98;
 
+ARG USERNAME
+
 #set folder owner for composer cache
-RUN useradd -m ttescaro
-RUN chown -R ttescaro:ttescaro /var/www/html/
-USER ttescaro
+RUN useradd -m $USERNAME
+RUN chown -R $USERNAME:$USERNAME /var/www/html/
+USER $USERNAME
 
 RUN composer config --global process-timeout 1500
 RUN composer config --global repo.packagist composer https://packagist.org
@@ -75,7 +77,7 @@ RUN mv phpcs.phar /usr/local/bin/phpcs
 RUN curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar
 RUN chmod +x phpcbf.phar
 RUN mv phpcbf.phar /usr/local/bin/phpcbf
-USER ttescaro
+USER $USERNAME
 
 RUN curl -sS https://accounts.magento.cloud/cli/installer | php
 

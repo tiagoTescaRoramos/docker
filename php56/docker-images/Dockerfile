@@ -71,11 +71,13 @@ RUN php -r "copy('https://files.magerun.net/n98-magerun-1.103.3.phar', 'n98-mage
     && mv n98-magerun.phar /usr/bin/n98 \
     && chmod +x /usr/bin/n98
 
-#set folder owner for composer cache
-RUN useradd -m ttescaro \
-    && chown -R ttescaro:ttescaro /var/www/
+ARG USERNAME
 
-USER ttescaro
+#set folder owner for composer cache
+RUN useradd -m $USERNAME \
+    && chown -R $USERNAME:$USERNAME /var/www/
+
+USER $USERNAME
 
 RUN composer config --global process-timeout 1500
 RUN composer config --global repo.packagist composer https://packagist.org
@@ -83,9 +85,9 @@ RUN composer config --global repo.packagist composer https://packagist.org
 # PHPCS
 RUN composer global require zifius/magizendo
 USER root
-RUN ln -s /home/ttescaro/.composer/vendor/bin/phpcs /usr/local/bin
-USER ttescaro
-RUN phpcs --config-set installed_paths /home/ttescaro/.composer/vendor/zifius/magizendo/ \
+RUN ln -s /home/$USERNAME/.composer/vendor/bin/phpcs /usr/local/bin
+USER $USERNAME
+RUN phpcs --config-set installed_paths /home/$USERNAME/.composer/vendor/zifius/magizendo/ \
     && phpcs --config-set default_standard Magento1
 
 # Make sure the volume mount point is empty

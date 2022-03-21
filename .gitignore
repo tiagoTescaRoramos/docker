@@ -6,3 +6,5 @@ sites-enabled/
 !sites-enabled/magento2.conf
 !sites-enabled/magento1.conf
 .idea
+.env
+dumps/*
