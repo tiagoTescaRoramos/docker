@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+./up.sh
 echo "Database name: "
 read database;
 
