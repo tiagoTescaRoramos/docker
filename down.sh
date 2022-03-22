@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-./config.sh --env-config
+./config.sh
 docker-compose -f php56/docker-compose.yml --env-file .env down
 docker-compose -f php72/docker-compose.yml --env-file .env down
 docker-compose -f php73/docker-compose.yml --env-file .env down
