@@ -63,13 +63,13 @@ Put your backup in dumps/. Execute:
 ```
 When finish, command will delete your files in dumps/.
 
-#.ENV
+# .ENV
 - CONTAINER_USER=ttescaro -> **User the container**
 - DB_PASSWORD=mudar@123 -> **Password the mysql. If database exist, change the password in the MYSQL**
 - RABBITMQ_DEFAULT_USER=guest -> **Username RabbitMQ**
 - RABBITMQ_DEFAULT_PASS=guest -> **Password RabbitMQ**
 - DIRECTORY_PROJECTS=../../ -> **Directory projects that you will clone or create. Default is same folder as docker folder**
 
-#HOSTs
+# HOSTs
 **./config.sh --ngnix-server-name** will create configuration ngnix, but You need to add you host of project in you hosts the your Operation System.
 The linux or WSL the windows, the file is /etc/hosts
