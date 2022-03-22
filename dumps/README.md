@@ -1,5 +1,5 @@
 ### Restore
-Put your file this directory. Execute:
+Put your backup this directory. Execute:
 ```
 ./restoreDB.sh
 ```

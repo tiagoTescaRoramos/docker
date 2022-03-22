@@ -28,7 +28,7 @@ services:
         USERNAME: ${CONTAINER_USER}
     container_name: php
     volumes:
-      - ../../:/var/www/html
+      - ${DIRECTORY_PROJECTS}:/var/www/html
       - ~/.ssh/:/home/${CONTAINER_USER}/.ssh
       - ~/.magento-cloud/:/home/${CONTAINER_USER}/.magento-cloud
       - ../../.composer72/:/home/${CONTAINER_USER}/.composer

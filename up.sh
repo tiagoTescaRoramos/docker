@@ -18,6 +18,33 @@ if [ "$1" == '' ]; then
 else
   phpversion=$@
 fi
+
+if [ ! -d '../databases' ]; then
+  mkdir '../databases';
+  chmod 0777 -R '../databases';
+  echo 'Create folder ../databases with success.';
+fi;
+
+if [ ! -d '../.composer' ]; then
+    mkdir '../.composer';
+    chmod 0777 -R '../.composer';
+    echo 'Create folder ../.composer with success.';
+fi;
+
+if [ ! -d '../tmp' ]; then
+    mkdir '../tmp';
+    chmod 0777 -R '../tmp';
+    echo 'Create folder ../tmp with success.';
+fi;
+
+if [ ! -d '../var' ]; then
+    mkdir '../var';
+    chmod 0777 -R '../var';
+    mkdir '../var/log';
+    chmod 0777 -R '../var/log';
+    echo 'Create folder ../var with success.';
+fi;
+
 sudo sysctl -w vm.max_map_count=262144
 if [ $phpversion == "php56" ]; then
     ./down.sh
