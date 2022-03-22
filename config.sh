@@ -4,7 +4,10 @@ if ! test -f "$FILE"; then
     cp .env.example .env
 fi
 
-if [ "$1" == '--help' ] || [ "$1" == '-h' ]; then
+if [ "$1" == '--help' ] || [ "$1" == '-h' ] || ["$1" == '']; then
+  echo '--------------------------------------------------------HELP----------------------------------------------------';
+  echo '';
+  echo '';
   echo 'Command                 | Description';
   echo '--ngnix-server-name     | Configure hosts the project in ngnix. Create files .conf with configuration the ngnix';
   echo '--restore-db            | Restore database. You need to put your backup in dumps/. If database dont exist, the command create for you' ;
@@ -26,4 +29,8 @@ fi
 
 if [ "$1" == '--restore-db' ]; then
   ./retoreDB.sh
+fi
+
+if [ "$1" == '--ngnix-server-name' ]; then
+  ./config-nginx-server-name.sh
 fi
